@@ -1,12 +1,14 @@
-import { FC } from "react";
 import SearchBar from "../Components/search-bar/search-bar.component";
+import headerStyle from "./header.style";
 
-const Header: FC<{ onSubmit: (serialNumber: string) => void }> = ({
-  onSubmit,
-}) => {
+const Header: React.FC<{
+  error: string | null;
+  onSubmit: (serialNumber: string) => void;
+}> = ({ error, onSubmit }) => {
   return (
     <header>
       <SearchBar onSubmit={onSubmit} />
+      <p style={headerStyle}>{error}</p>
     </header>
   );
 };

@@ -1,1 +1,1 @@
-export const stringValidator: RegExp = /[a-zA-Z]+/g;
+export const stringValidator: RegExp = /^[A-Z0-9_.-]*$/;

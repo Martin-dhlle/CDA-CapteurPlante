@@ -40,7 +40,7 @@ const SearchBar: FC<{ onSubmit: (serialNumber: string) => void }> = ({
 
   return (
     <div>
-      <p>Identification du capteur par la valeur héxadécimal</p>
+      <p>Identification du capteur par la valeur hexadécimal</p>
       <TextField
         variant="outlined"
         type="text"
