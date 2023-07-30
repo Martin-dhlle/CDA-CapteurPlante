@@ -1,15 +1,18 @@
+import { Box } from "@mui/material";
 import SearchBar from "../Components/search-bar/search-bar.component";
-import headerStyle from "./header.style";
+import { headerStyleSx } from "./header.style";
+import DarkModeSwitcher from "../Components/dark-mode-switcher/dark-mode-switcher";
 
 const Header: React.FC<{
-  error: string | null;
+  fetchError: string | null;
   onSubmit: (serialNumber: string) => void;
-}> = ({ error, onSubmit }) => {
+}> = ({ fetchError, onSubmit }) => {
   return (
-    <header>
-      <SearchBar onSubmit={onSubmit} />
-      <p style={headerStyle}>{error}</p>
-    </header>
+    <Box sx={headerStyleSx.box}>
+      <Box sx={{ flex: 1 }}></Box>
+      <SearchBar fetchError={fetchError} onSubmit={onSubmit} />
+      <DarkModeSwitcher />
+    </Box>
   );
 };
 

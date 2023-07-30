@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import {
   ChangeEvent,
   ChangeEventHandler,
@@ -9,15 +9,17 @@ import {
   useState,
 } from "react";
 import { stringValidator } from "./validator";
+import { SearchBarStyle, SearchBarStyleSx } from "./search-bar.style";
 
-const SearchBar: FC<{ onSubmit: (serialNumber: string) => void }> = ({
-  onSubmit,
-}) => {
+const SearchBar: FC<{
+  fetchError: string | null;
+  onSubmit: (serialNumber: string) => void;
+}> = ({ fetchError, onSubmit }) => {
   const [value, setValue] = useState<string>("");
   const [error, setError] = useState<"initial" | "include" | "none">("initial");
 
   useEffect(() => {
-    if (stringValidator.test(value) || error === "initial") {
+    if (stringValidator.test(value) && error !== "initial") {
       setError("none");
       console.log("no error");
     }
@@ -39,7 +41,7 @@ const SearchBar: FC<{ onSubmit: (serialNumber: string) => void }> = ({
   };
 
   return (
-    <div>
+    <Box sx={SearchBarStyleSx.box}>
       <p>Identification du capteur par la valeur hexadécimal</p>
       <TextField
         variant="outlined"
@@ -49,7 +51,8 @@ const SearchBar: FC<{ onSubmit: (serialNumber: string) => void }> = ({
         onKeyDown={handleConfirmSubmitValue}
         error={error === "include"}
       />
-    </div>
+      <p style={SearchBarStyle.textRed}>{fetchError}</p>
+    </Box>
   );
 };
 

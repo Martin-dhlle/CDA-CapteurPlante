@@ -2,30 +2,40 @@ import { useState } from "react";
 import Header from "./Header/header.component";
 import Sensor from "./utils/interfaces/Sensor";
 import Main from "./Main/main.component";
-import { sensors } from "./utils/fakeDataJson/sensors.data";
+import { sensors } from "./utils/fakeData/sensors.data";
 import { notFindError } from "./utils/errorMessages";
+import AppProvider from "./context/app.provider";
 
+/*
+  Le composant d'entrée de l'application
+*/
 function App() {
+  // définit le capteur à passer au compo main
   const [sensorSelected, setSensorSelected] = useState<Sensor | null>(null);
-  const [error, SetError] = useState<string | null>(null);
 
+  // gestion de l'erreur de la requête émise par handleSubmitSerialNumber
+  const [fetchError, SetFetchError] = useState<string | null>(null);
+
+  // envoi de la requête à la base de donnée afin de changer le capteur sélectionné si réponse favorable
   const handleSubmitSerialNumber = (serialNumber: string) => {
+    // remplacer par la requête via AWS lambda function
     const newSensor = sensors.filter(
       (sensor) => sensor.serialNumber === serialNumber
     )[0];
     if (!newSensor) {
-      SetError(notFindError);
+      SetFetchError(notFindError);
       return;
     }
-    SetError(null);
+    SetFetchError(null);
     setSensorSelected(newSensor);
+    console.log(sensorSelected);
   };
 
   return (
-    <>
-      <Header error={error} onSubmit={handleSubmitSerialNumber} />
+    <AppProvider>
+      <Header fetchError={fetchError} onSubmit={handleSubmitSerialNumber} />
       <Main />
-    </>
+    </AppProvider>
   );
 }
 
