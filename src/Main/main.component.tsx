@@ -5,7 +5,11 @@ import { AppContext } from "../context/app.context";
 
 const Main: FC<{}> = ({}) => {
   const { theme } = useContext(AppContext);
-  return <Box sx={styleSx.box[theme]}></Box>;
+  return (
+    <Box sx={styleSx.box[theme]}>
+      <p>test</p>
+    </Box>
+  );
 };
 
 export default Main;
