@@ -5,7 +5,7 @@ import Main from "./Main/main.component";
 import { sensors } from "./utils/fakeData/sensors.data";
 import { notFindError } from "./utils/errorMessages";
 import AppProvider from "./context/app.provider";
-import { Box } from "@mui/material";
+import { addSensorToLocalStorage } from "./utils/services/localStorageServices";
 
 /*
   Le composant d'entrée de l'application
@@ -27,8 +27,9 @@ function App() {
       SetFetchError(notFindError);
       return;
     }
-    SetFetchError(null);
-    setSensorSelected(newSensor);
+    SetFetchError(null); // Efface l'erreur de l'input
+    setSensorSelected(newSensor); // le nouveau capteur est maintenant selectionné pour l'affichage de ses propres données
+    addSensorToLocalStorage(newSensor); // stockage du numero de série du nouveau capteur dans le localStorage
     console.log(sensorSelected);
   };
 
