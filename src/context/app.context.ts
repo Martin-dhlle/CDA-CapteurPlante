@@ -1,7 +1,7 @@
 import { Context, createContext } from "react";
 
 export interface AppContextInterface {
-  theme: "light" | "dark" | undefined;
+  theme: "light" | "dark";
   toggleTheme: () => void;
 }
 

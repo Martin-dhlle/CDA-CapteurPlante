@@ -5,6 +5,7 @@ import Main from "./Main/main.component";
 import { sensors } from "./utils/fakeData/sensors.data";
 import { notFindError } from "./utils/errorMessages";
 import AppProvider from "./context/app.provider";
+import { Box } from "@mui/material";
 
 /*
   Le composant d'entrée de l'application

@@ -1,14 +1,30 @@
 import { SxProps } from "@mui/material";
 import { CSSProperties } from "react";
 
-export const SearchBarStyle: { [key: string]: CSSProperties } = {
-  textRed: { color: "red" },
+export const style: { [key: string]: { [key: string]: CSSProperties } } = {
+  input: {
+    light: { textAlign: "center", backgroundColor: "white" },
+    dark: { textAlign: "center", backgroundColor: "white" },
+  },
+  error: {
+    light: { color: "red" },
+    dark: { color: "red" },
+  },
 };
 
-export const SearchBarStyleSx: { [key: string]: SxProps } = {
+export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
   box: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    light: {
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    dark: {
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
   },
 };

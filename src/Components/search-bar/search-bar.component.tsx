@@ -5,16 +5,20 @@ import {
   FC,
   KeyboardEvent,
   KeyboardEventHandler,
+  useContext,
   useEffect,
   useState,
 } from "react";
 import { stringValidator } from "./validator";
-import { SearchBarStyle, SearchBarStyleSx } from "./search-bar.style";
+import { style, styleSx } from "./search-bar.style";
+import { AppContext } from "../../context/app.context";
 
 const SearchBar: FC<{
   fetchError: string | null;
   onSubmit: (serialNumber: string) => void;
 }> = ({ fetchError, onSubmit }) => {
+  const { theme } = useContext(AppContext);
+
   const [value, setValue] = useState<string>("");
   const [error, setError] = useState<"initial" | "include" | "none">("initial");
 
@@ -41,9 +45,12 @@ const SearchBar: FC<{
   };
 
   return (
-    <Box sx={SearchBarStyleSx.box}>
+    <Box sx={styleSx.box[theme]}>
       <p>Identification du capteur par la valeur hexadécimal</p>
       <TextField
+        inputProps={{
+          style: style.input[theme],
+        }}
         variant="outlined"
         type="text"
         value={value}
@@ -51,7 +58,7 @@ const SearchBar: FC<{
         onKeyDown={handleConfirmSubmitValue}
         error={error === "include"}
       />
-      <p style={SearchBarStyle.textRed}>{fetchError}</p>
+      <p style={style.error[theme]}>{fetchError}</p>
     </Box>
   );
 };
