@@ -2,12 +2,19 @@ import { Box, List } from "@mui/material";
 import { FC } from "react";
 import SensorItem from "./sensor-item";
 
-const SensorsList: FC<{ serialsNumbers: string[] }> = ({ serialsNumbers }) => {
+const SensorsList: FC<{
+  serialsNumbers: string[];
+  onDelete: (serialNumber: string) => void;
+}> = ({ serialsNumbers, onDelete }) => {
   if (serialsNumbers.length > 0)
     return (
       <List>
         {serialsNumbers.map((serialNumber) => (
-          <SensorItem serialNumber={serialNumber}></SensorItem>
+          <SensorItem
+            key={serialNumber}
+            serialNumber={serialNumber}
+            onDelete={onDelete}
+          ></SensorItem>
         ))}
       </List>
     );

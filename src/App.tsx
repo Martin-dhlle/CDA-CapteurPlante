@@ -30,13 +30,13 @@ function App() {
     SetFetchError(null); // Efface l'erreur de l'input
     setSensorSelected(newSensor); // le nouveau capteur est maintenant selectionné pour l'affichage de ses propres données
     addSensorToLocalStorage(newSensor); // stockage du numero de série du nouveau capteur dans le localStorage
-    console.log(sensorSelected);
+    console.log(newSensor);
   };
 
   return (
     <AppProvider>
       <Header fetchError={fetchError} onSubmit={handleSubmitSerialNumber} />
-      <Main />
+      <Main /* sensorSelected={sensorSelected} */ />
     </AppProvider>
   );
 }

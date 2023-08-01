@@ -1,9 +1,10 @@
 import { Box, Drawer, IconButton } from "@mui/material";
-import { FC, useContext, useState } from "react";
+import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { styleSx } from "./last-sensors-visited.style";
 import { AppContext } from "../../context/app.context";
 import { List } from "@mui/icons-material";
 import SensorsList from "./sensors-list/sensors-list.components";
+import { getSensorsFromLocalStorage } from "../../utils/services/localStorageServices";
 
 const LastSensorsVisited: FC<{}> = ({}) => {
   const { theme } = useContext(AppContext);
@@ -12,17 +13,26 @@ const LastSensorsVisited: FC<{}> = ({}) => {
 
   const [serialNumbers, setSerialNumbers] = useState<string[]>([]);
 
+  const initSensor = () => {
+    setSerialNumbers(getSensorsFromLocalStorage());
+  };
+
   const handleToggleDrawer = () => {
+    setSerialNumbers(getSensorsFromLocalStorage());
     setDrawerOpenState(!isDrawerOpen);
   };
 
-  const handleDeleteSerialNumber = (serialNumberToDelete: string) => {
+  const handleDeleteSerialNumber = (serialNumber: string) => {
     setSerialNumbers((currentSerialNumbers) =>
       currentSerialNumbers.filter(
-        (currentSerialNumber) => currentSerialNumber !== serialNumberToDelete
+        (currentSerialNumber) => currentSerialNumber !== serialNumber
       )
     );
   };
+
+  useEffect(() => {
+    initSensor();
+  }, []);
 
   return (
     <>
@@ -32,7 +42,10 @@ const LastSensorsVisited: FC<{}> = ({}) => {
         </IconButton>
       </Box>
       <Drawer open={isDrawerOpen} onClose={handleToggleDrawer}>
-        <SensorsList serialsNumbers={serialNumbers} />
+        <SensorsList
+          serialsNumbers={serialNumbers}
+          onDelete={handleDeleteSerialNumber}
+        />
       </Drawer>
     </>
   );
