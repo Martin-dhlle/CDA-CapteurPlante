@@ -1,26 +1,30 @@
 import { Box, List } from "@mui/material";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import SensorItem from "./sensor-item/sensor-item";
+import { styleSx } from "./sensor-list.style";
+import { AppContext } from "../../../context/app.context";
 
 const SensorsList: FC<{
   serialsNumbers: string[];
   onDelete: (serialNumber: string) => void;
 }> = ({ serialsNumbers, onDelete }) => {
-  if (serialsNumbers.length > 0)
-    return (
-      <List>
-        {serialsNumbers.map((serialNumber) => (
-          <SensorItem
-            key={serialNumber}
-            serialNumber={serialNumber}
-            onDelete={onDelete}
-          />
-        ))}
-      </List>
-    );
+  const { theme } = useContext(AppContext);
+
   return (
-    <Box>
-      <p>Aucun capteurs consultés récemment</p>
+    <Box sx={styleSx.box[theme]}>
+      {serialsNumbers.length > 0 ? (
+        <List>
+          {serialsNumbers.map((serialNumber) => (
+            <SensorItem
+              key={serialNumber}
+              serialNumber={serialNumber}
+              onDelete={onDelete}
+            />
+          ))}
+        </List>
+      ) : (
+        <p>Aucun capteurs consultés récemment</p>
+      )}
     </Box>
   );
 };
