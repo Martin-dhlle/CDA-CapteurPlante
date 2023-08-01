@@ -8,18 +8,16 @@ export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
     light: {
       display: "flex",
       flexDirection: "row",
-      height: "20vh",
-      width: "100%",
       bgcolor: "lightgreen",
       color: "black",
+      padding: "10px",
     },
     dark: {
       display: "flex",
       flexDirection: "row",
-      height: "20vh",
-      width: "100%",
       bgcolor: "black",
       color: "white",
+      padding: "10px",
     },
   },
 };

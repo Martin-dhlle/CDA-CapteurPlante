@@ -1,26 +1,27 @@
 import { SxProps } from "@mui/material";
 import { CSSProperties } from "react";
 
-export const style: { [key: string]: { [key: string]: CSSProperties } } = {
-  input: {
-    light: { textAlign: "center", backgroundColor: "white" },
-    dark: { textAlign: "center", backgroundColor: "white" },
-  },
-};
+export const style: { [key: string]: CSSProperties } = {};
 
 export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
   box: {
     light: {
+      top: 0,
+      bottom: 0,
+      height: "100vh",
       width: "100%",
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
+      bgcolor: "blue",
     },
     dark: {
+      top: 0,
+      bottom: 0,
+      height: "100vh",
       width: "100%",
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
+      bgcolor: "blue",
     },
   },
 };

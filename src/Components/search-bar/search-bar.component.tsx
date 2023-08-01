@@ -13,26 +13,23 @@ import { stringValidator } from "./validator";
 import { style, styleSx } from "./search-bar.style";
 import { AppContext } from "../../context/app.context";
 
-const SearchBar: FC<{
-  fetchError: string | null;
-  onSubmit: (serialNumber: string) => void;
-}> = ({ fetchError, onSubmit }) => {
-  const { theme } = useContext(AppContext);
+const SearchBar: FC<{}> = ({}) => {
+  const { theme, handleSubmitSerialNumber } = useContext(AppContext);
 
-  const [value, setValue] = useState<string>("");
+  const [serialNumberValue, setSerialNumberValue] = useState<string>("");
   const [error, setError] = useState<"initial" | "include" | "none">("initial");
 
   useEffect(() => {
-    if (stringValidator.test(value) && error !== "initial") {
+    if (stringValidator.test(serialNumberValue) && error !== "initial") {
       setError("none");
       console.log("no error");
     }
-  }, [error, value]);
+  }, [error, serialNumberValue]);
 
   const handleChangeValue: ChangeEventHandler<HTMLInputElement> = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setValue(event.target.value);
+    setSerialNumberValue(event.target.value);
     setError("include");
   };
 
@@ -40,7 +37,7 @@ const SearchBar: FC<{
     event: KeyboardEvent<HTMLInputElement>
   ) => {
     if (event.key === "Enter" && error === "none") {
-      onSubmit(value);
+      handleSubmitSerialNumber(serialNumberValue, true);
     }
   };
 
@@ -53,12 +50,11 @@ const SearchBar: FC<{
         }}
         variant="outlined"
         type="text"
-        value={value}
+        value={serialNumberValue}
         onChange={handleChangeValue}
         onKeyDown={handleConfirmSubmitValue}
         error={error === "include"}
       />
-      <p style={style.error[theme]}>{fetchError}</p>
     </Box>
   );
 };

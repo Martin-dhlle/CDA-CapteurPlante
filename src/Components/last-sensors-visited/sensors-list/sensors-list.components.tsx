@@ -1,6 +1,6 @@
 import { Box, List } from "@mui/material";
 import { FC } from "react";
-import SensorItem from "./sensor-item";
+import SensorItem from "./sensor-item/sensor-item";
 
 const SensorsList: FC<{
   serialsNumbers: string[];
@@ -14,7 +14,7 @@ const SensorsList: FC<{
             key={serialNumber}
             serialNumber={serialNumber}
             onDelete={onDelete}
-          ></SensorItem>
+          />
         ))}
       </List>
     );

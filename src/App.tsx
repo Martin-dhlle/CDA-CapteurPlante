@@ -1,42 +1,23 @@
-import { useState } from "react";
+import { Box } from "@mui/material";
 import Header from "./Header/header.component";
-import Sensor from "./utils/interfaces/Sensor";
 import Main from "./Main/main.component";
-import { sensors } from "./utils/fakeData/sensors.data";
-import { notFindError } from "./utils/errorMessages";
 import AppProvider from "./context/app.provider";
-import { addSensorToLocalStorage } from "./utils/services/localStorageServices";
+import { styleSx } from "./App.style";
+import { useContext } from "react";
+import { AppContext } from "./context/app.context";
 
 /*
   Le composant d'entrée de l'application
 */
 function App() {
-  // définit le capteur à passer au compo main
-  const [sensorSelected, setSensorSelected] = useState<Sensor | null>(null);
-
-  // gestion de l'erreur de la requête émise par handleSubmitSerialNumber
-  const [fetchError, SetFetchError] = useState<string | null>(null);
-
-  // envoi de la requête à la base de donnée afin de changer le capteur sélectionné si réponse favorable
-  const handleSubmitSerialNumber = (serialNumber: string) => {
-    // remplacer par la requête via AWS lambda function
-    const newSensor = sensors.filter(
-      (sensor) => sensor.serialNumber === serialNumber
-    )[0];
-    if (!newSensor) {
-      SetFetchError(notFindError);
-      return;
-    }
-    SetFetchError(null); // Efface l'erreur de l'input
-    setSensorSelected(newSensor); // le nouveau capteur est maintenant selectionné pour l'affichage de ses propres données
-    addSensorToLocalStorage(newSensor); // stockage du numero de série du nouveau capteur dans le localStorage
-    console.log(newSensor);
-  };
+  const { theme } = useContext(AppContext);
 
   return (
     <AppProvider>
-      <Header fetchError={fetchError} onSubmit={handleSubmitSerialNumber} />
-      <Main /* sensorSelected={sensorSelected} */ />
+      <Box sx={styleSx.box[theme]}>
+        <Header />
+        <Main />
+      </Box>
     </AppProvider>
   );
 }
