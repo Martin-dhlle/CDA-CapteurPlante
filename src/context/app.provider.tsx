@@ -6,6 +6,7 @@ import {
   getSensorsFromLocalStorage,
 } from "../utils/services/localStorageServices";
 import { sensors } from "../utils/fakeData/sensors.data";
+import { Toaster, toast } from "react-hot-toast";
 
 type Props = { children: ReactNode };
 
@@ -34,10 +35,12 @@ const AppProvider: FC<Props> = ({ children }) => {
     const newSensor = sensors.filter(
       (sensor) => sensor.serialNumber === serialNumber
     )[0];
+
     if (!newSensor) {
-      // throw error with toaster
+      toast.error("Ce numéro de série n'existe pas");
       return;
     }
+
     setSelectedSensor(newSensor); // le nouveau capteur est maintenant selectionné pour l'affichage de ses propres données
     console.log(newSensor); // affichage des données du capteur dans la console du navigateur
 
@@ -46,8 +49,6 @@ const AppProvider: FC<Props> = ({ children }) => {
       à partir de la barre de recherche input et qu'il n'existe pas déjà dans le localStorage
     */
     if (fromSearchBar && !getSensorsFromLocalStorage().includes(serialNumber)) {
-      console.log("added!"); // to remove
-
       addSensorToLocalStorage(newSensor);
     }
   };
@@ -56,6 +57,7 @@ const AppProvider: FC<Props> = ({ children }) => {
     <AppContext.Provider
       value={{ theme, toggleTheme, selectedSensor, handleSubmitSerialNumber }}
     >
+      <Toaster position="top-right" />
       {children}
     </AppContext.Provider>
   );

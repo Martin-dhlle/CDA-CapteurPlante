@@ -12,7 +12,7 @@ export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
       width: "100%",
       display: "flex",
       flexDirection: "column",
-      bgcolor: "blue",
+      bgcolor: "white",
     },
     dark: {
       top: 0,
@@ -21,7 +21,7 @@ export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
       width: "100%",
       display: "flex",
       flexDirection: "column",
-      bgcolor: "blue",
+      bgcolor: "black",
     },
   },
 };

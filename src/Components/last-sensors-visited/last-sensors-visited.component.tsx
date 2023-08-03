@@ -1,10 +1,13 @@
 import { Box, Drawer, IconButton } from "@mui/material";
-import { FC, useCallback, useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { styleSx } from "./last-sensors-visited.style";
 import { AppContext } from "../../context/app.context";
 import { List } from "@mui/icons-material";
 import SensorsList from "./sensors-list/sensors-list.components";
-import { getSensorsFromLocalStorage } from "../../utils/services/localStorageServices";
+import {
+  deleteSensorsFromLocalStorage,
+  getSensorsFromLocalStorage,
+} from "../../utils/services/localStorageServices";
 
 const LastSensorsVisited: FC<{}> = ({}) => {
   const { theme } = useContext(AppContext);
@@ -23,11 +26,11 @@ const LastSensorsVisited: FC<{}> = ({}) => {
   };
 
   const handleDeleteSerialNumber = (serialNumber: string) => {
-    setSerialNumbers((currentSerialNumbers) =>
-      currentSerialNumbers.filter(
-        (currentSerialNumber) => currentSerialNumber !== serialNumber
-      )
+    deleteSensorsFromLocalStorage(serialNumber);
+    const newSerialNumbers = serialNumbers.filter(
+      (currentSerialNumber) => currentSerialNumber !== serialNumber
     );
+    setSerialNumbers(newSerialNumbers);
   };
 
   useEffect(() => {

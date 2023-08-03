@@ -13,6 +13,15 @@ export function addSensorToLocalStorage(sensor: Sensor) {
   localStorage.setItem("sensors", newSensors);
 }
 
+export function deleteSensorsFromLocalStorage(serialNumber: string) {
+  const currentSensors: string[] = getSensorsFromLocalStorage() ?? [];
+  const filteredSensors = currentSensors.filter(
+    (sensor) => sensor !== serialNumber
+  );
+  const newSensors = formatSerialNumbersListToString(filteredSensors);
+  localStorage.setItem("sensors", newSensors);
+}
+
 export function getSensorsFromLocalStorage(): string[] {
   const currentSensors = localStorage.getItem("sensors");
   if (!currentSensors) return [];

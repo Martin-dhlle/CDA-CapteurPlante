@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Alert, Box, Snackbar, TextField } from "@mui/material";
 import {
   ChangeEvent,
   ChangeEventHandler,
@@ -12,6 +12,7 @@ import {
 import { stringValidator } from "./validator";
 import { style, styleSx } from "./search-bar.style";
 import { AppContext } from "../../context/app.context";
+import { toast } from "react-hot-toast";
 
 const SearchBar: FC<{}> = ({}) => {
   const { theme, handleSubmitSerialNumber } = useContext(AppContext);
@@ -36,8 +37,11 @@ const SearchBar: FC<{}> = ({}) => {
   const handleConfirmSubmitValue: KeyboardEventHandler<HTMLInputElement> = (
     event: KeyboardEvent<HTMLInputElement>
   ) => {
-    if (event.key === "Enter" && error === "none") {
-      handleSubmitSerialNumber(serialNumberValue, true);
+    if (event.key === "Enter") {
+      error === "none"
+        ? handleSubmitSerialNumber(serialNumberValue, true)
+        : toast.error("Le format du numéro de série est incorrect");
+      return;
     }
   };
 
