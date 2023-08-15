@@ -6,7 +6,7 @@ import {
   getSensorsFromLocalStorage,
 } from "../utils/services/localStorageServices";
 import { sensors } from "../utils/fakeData/sensors.data";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 type Props = { children: ReactNode };
 
@@ -57,7 +57,6 @@ const AppProvider: FC<Props> = ({ children }) => {
     <AppContext.Provider
       value={{ theme, toggleTheme, selectedSensor, handleSubmitSerialNumber }}
     >
-      <Toaster position="top-right" />
       {children}
     </AppContext.Provider>
   );

@@ -1,10 +1,11 @@
 import { Box } from "@mui/material";
-import Header from "./Header/header.component";
-import Main from "./Main/main.component";
-import AppProvider from "./context/app.provider";
 import { styleSx } from "./App.style";
 import { useContext } from "react";
-import { AppContext } from "./context/app.context";
+import { Toaster } from "react-hot-toast";
+import { AppContext } from "../context/app.context";
+import AppProvider from "../context/app.provider";
+import Header from "./Header/header.component";
+import Main from "./Main/main.component";
 
 /*
   Le composant d'entrée de l'application
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <AppProvider>
+      <Toaster position="top-right" />
       <Box sx={styleSx.box[theme]}>
         <Header />
         <Main />
