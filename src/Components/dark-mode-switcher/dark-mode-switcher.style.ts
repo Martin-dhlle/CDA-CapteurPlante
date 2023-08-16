@@ -6,10 +6,20 @@ export const style: { [key: string]: CSSProperties } = {};
 export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
   button: {
     light: {
-      color: "black",
+      color: "lightcyan",
     },
     dark: {
-      color: "white",
+      color: "whitesmoke",
+    },
+  },
+  iconSize: {
+    light: {
+      height: "40px",
+      width: "40px",
+    },
+    dark: {
+      height: "40px",
+      width: "40px",
     },
   },
 };

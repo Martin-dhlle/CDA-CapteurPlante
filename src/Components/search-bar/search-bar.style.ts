@@ -4,7 +4,7 @@ import { CSSProperties } from "react";
 export const style: { [key: string]: { [key: string]: CSSProperties } } = {
   input: {
     light: { textAlign: "center", backgroundColor: "white" },
-    dark: { textAlign: "center", backgroundColor: "white" },
+    dark: { textAlign: "center", backgroundColor: "lightgray" },
   },
 };
 
@@ -16,6 +16,8 @@ export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
       flexDirection: "column",
       alignItems: "center",
       margin: "10px",
+      color: "white",
+      fontWeight: "bold",
     },
     dark: {
       width: "100%",
@@ -23,6 +25,8 @@ export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
       flexDirection: "column",
       alignItems: "center",
       margin: "10px",
+      color: "lightgray",
+      fontWeight: "bold",
     },
   },
 };

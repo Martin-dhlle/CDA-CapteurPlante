@@ -41,7 +41,7 @@ const LastSensorsVisited: FC<{}> = ({}) => {
     <>
       <Box>
         <IconButton sx={styleSx.button[theme]} onClick={handleToggleDrawer}>
-          {theme === "light" ? <List /> : <List />}
+          <List sx={styleSx.iconSize[theme]} />
         </IconButton>
       </Box>
       <Drawer open={isDrawerOpen} onClose={handleToggleDrawer}>

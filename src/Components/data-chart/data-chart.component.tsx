@@ -2,7 +2,7 @@ import { FC } from "react";
 import ScalableBox from "../UI/scalable-box/scalable-box.component";
 import { ComponentProperties } from "../../hooks/useComponentSize";
 
-const ListAlertData: FC<{ componentProperties: ComponentProperties }> = ({
+const DataChart: FC<{ componentProperties: ComponentProperties }> = ({
   componentProperties,
 }) => {
   if (componentProperties.isClosed) return null;
@@ -13,4 +13,4 @@ const ListAlertData: FC<{ componentProperties: ComponentProperties }> = ({
   );
 };
 
-export default ListAlertData;
+export default DataChart;

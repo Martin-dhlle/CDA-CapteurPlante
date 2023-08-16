@@ -14,7 +14,11 @@ const DarkModeSwitcher = () => {
   return (
     <Box>
       <IconButton sx={styleSx.button[theme]} onClick={handleClick}>
-        {theme === "light" ? <DarkModeOutlined /> : <DarkMode />}
+        {theme === "light" ? (
+          <DarkModeOutlined sx={styleSx.iconSize[theme]} />
+        ) : (
+          <DarkMode sx={styleSx.iconSize[theme]} />
+        )}
       </IconButton>
     </Box>
   );

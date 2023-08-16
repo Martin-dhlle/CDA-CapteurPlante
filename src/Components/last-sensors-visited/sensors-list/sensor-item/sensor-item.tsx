@@ -38,7 +38,9 @@ const SensorItem: FC<{
       <p style={style.text[theme]} onClick={handleClickSelect}>
         {serialNumber}
       </p>
-      <Button onClick={handleClickDelete}>supprimer</Button>
+      <Button sx={styleSx.button[theme]} onClick={handleClickDelete}>
+        supprimer
+      </Button>
     </Box>
   );
 };

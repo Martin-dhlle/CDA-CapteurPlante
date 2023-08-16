@@ -1,7 +1,25 @@
 import { SxProps } from "@mui/material";
 import { CSSProperties } from "react";
 
-export const style: { [key: string]: CSSProperties } = {};
+export const style: { [key: string]: CSSProperties } = {
+  columnSeparate: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "start",
+    alignItems: "center",
+    rowGap: "30%",
+    paddingTop: 20,
+  },
+  rowSeparate: {
+    width: "100vh",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    columnGap: "1em",
+  },
+};
 
 export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
   box: {
