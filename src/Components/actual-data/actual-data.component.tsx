@@ -12,6 +12,8 @@ const ActualData: FC<{
     <ScalableBox size={componentProperties.size}>
       <p>Numéro de série : {sensor.serialNumber}</p>
       {sensor.name && <p>nom du capteur : {sensor.name}</p>}
+      <p>Taux d'humidité : {sensor.data[0].humidityRate} %</p>
+      <p>{sensor.data[0].updatedAt.toLocaleString()}</p>
     </ScalableBox>
   );
 };

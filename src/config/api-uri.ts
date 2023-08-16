@@ -1,3 +1,3 @@
-const apiUri = "https://sensorapifunction-4biprroisa-uc.a.run.app";
+const apiUri = "https://sensorapifunction-tzt335nl4q-uc.a.run.app";
 
 export default apiUri;
