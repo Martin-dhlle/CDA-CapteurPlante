@@ -9,6 +9,7 @@ export interface AppContextInterface {
     serialNumber: string,
     fromSearchBar: boolean
   ) => void;
+  isSensorLoading: boolean;
 }
 
 export const AppContext: Context<AppContextInterface> =
@@ -17,4 +18,5 @@ export const AppContext: Context<AppContextInterface> =
     toggleTheme: () => {},
     selectedSensor: null,
     handleSubmitSerialNumber: () => {},
+    isSensorLoading: false,
   });

@@ -4,13 +4,13 @@ export const data: Data[] = [
   {
     _id: "ks4iv9",
     humidityRate: 70,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    generatedAt: new Date(),
+    sensor: "vsld",
   },
   {
     _id: "svds",
     humidityRate: 65,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    generatedAt: new Date(),
+    sensor: "sdsdv",
   },
 ];

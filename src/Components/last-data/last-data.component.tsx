@@ -4,22 +4,29 @@ import Sensor from "../../utils/interfaces/Sensor";
 import { ComponentProperties } from "../../hooks/useComponentSize";
 import { Button } from "@mui/material";
 
-const ActualData: FC<{
+const LastData: FC<{
   sensor: Sensor;
   componentProperties: ComponentProperties;
 }> = ({ sensor, componentProperties }) => {
   if (componentProperties.isClosed) return null;
   return (
     <ScalableBox size={componentProperties.size}>
-      <div>
-        <p>Numéro de série : {sensor.serialNumber}</p>
-        {sensor.name && <p>nom du capteur : {sensor.name}</p>}
-        <p>Taux d'humidité : {sensor.data[0].humidityRate} %</p>
-        <p>{sensor.data[0].updatedAt.toLocaleString()}</p>
-        <Button type="button" variant="contained">
-          Historique et statistiques
-        </Button>
-      </div>
+      {sensor.data ? (
+        <div>
+          <p>Numéro de série : {sensor.serialNumber}</p>
+          {sensor.name && <p>nom du capteur : {sensor.name}</p>}
+          <p>Taux d'humidité : {sensor.data[0].humidityRate} %</p>
+          <p>{sensor.data[0].generatedAt.toLocaleString()}</p>
+          <Button type="button" variant="contained">
+            Historique et statistiques
+          </Button>
+        </div>
+      ) : (
+        <div>
+          <p>Aucune données enregistrée par le capteur</p>
+        </div>
+      )}
+
       <div>
         <p>Paramètres du capteur</p>
         <Button type="button" variant="contained">
@@ -33,4 +40,4 @@ const ActualData: FC<{
   );
 };
 
-export default ActualData;
+export default LastData;

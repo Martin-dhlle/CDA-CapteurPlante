@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { FC, useContext } from "react";
 import { style, styleSx } from "./main.style";
 import { AppContext } from "../../context/app.context";
-import ActualData from "../../components/actual-data/actual-data.component";
+import LastData from "../../components/last-data/last-data.component";
 import ListAlertData from "../../components/list-alert-data/list-alert-data.component";
 import ScalableBox from "../../components/UI/scalable-box/scalable-box.component";
 import DataChart from "../../components/data-chart/data-chart.component";
@@ -18,7 +18,7 @@ const Main: FC<{}> = (props) => {
     <Box sx={styleSx.box[theme]}>
       {selectedSensor ? (
         <div style={style.rowSeparate}>
-          <ActualData
+          <LastData
             sensor={selectedSensor}
             componentProperties={componentsProperties[0]}
           />

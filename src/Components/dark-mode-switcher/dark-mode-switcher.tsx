@@ -1,8 +1,8 @@
-import { DarkMode, DarkModeOutlined } from "@mui/icons-material";
-import { Box, IconButton } from "@mui/material";
-import { useContext } from "react";
-import { AppContext } from "../../context/app.context";
-import { styleSx } from "./dark-mode-switcher.style";
+import { DarkMode, DarkModeOutlined } from '@mui/icons-material';
+import { Box, IconButton } from '@mui/material';
+import { useContext } from 'react';
+import { AppContext } from '../../context/app.context';
+import { styleSx } from './dark-mode-switcher.style';
 
 const DarkModeSwitcher = () => {
   const { theme, toggleTheme } = useContext(AppContext);
@@ -14,7 +14,7 @@ const DarkModeSwitcher = () => {
   return (
     <Box>
       <IconButton sx={styleSx.button[theme]} onClick={handleClick}>
-        {theme === "light" ? (
+        {theme === 'light' ? (
           <DarkModeOutlined sx={styleSx.iconSize[theme]} />
         ) : (
           <DarkMode sx={styleSx.iconSize[theme]} />
