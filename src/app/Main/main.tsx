@@ -12,7 +12,9 @@ import componentsDeclaration from "./componentsPropertiesDeclaration";
 const Main: FC<{}> = (props) => {
   const { theme, selectedSensor, isSensorLoading } = useContext(AppContext);
 
-  const { componentsProperties } = useComponentSize(componentsDeclaration);
+  const { componentsProperties, changeComponentProperties } = useComponentSize(
+    componentsDeclaration
+  );
 
   if (isSensorLoading) return <CircularProgress />;
   return (
@@ -22,9 +24,21 @@ const Main: FC<{}> = (props) => {
           <LastData
             sensor={selectedSensor}
             componentProperties={componentsProperties[0]}
+            changeComponentProperties={changeComponentProperties}
           />
-          <ListAlertData componentProperties={componentsProperties[1]} />
-          <DataChart componentProperties={componentsProperties[2]} />
+          {selectedSensor.data && (
+            <>
+              <ListAlertData
+                componentProperties={componentsProperties[1]}
+                changeComponentProperties={changeComponentProperties}
+              />
+              <DataChart
+                data={selectedSensor.data}
+                componentProperties={componentsProperties[2]}
+                changeComponentProperties={changeComponentProperties}
+              />
+            </>
+          )}
         </div>
       ) : (
         <ScalableBox size="xs">
