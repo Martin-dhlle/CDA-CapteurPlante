@@ -1,51 +1,52 @@
 import { useState, useCallback } from "react";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import apiUri from "../config/api/api-uri";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import api from "../utils/axios";
+import { defaultErrorMessages } from "../utils/error/apiErrorMessage";
 
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 
-interface ApiPaths {
-  GET: string;
-  POST: string;
-  PUT: string;
-  DELETE: string;
-}
-
 interface UseRequestResponse<T> {
   data: T | null;
-  error: Error | null;
-  loading: boolean;
-  request: (method: HttpMethod, config?: AxiosRequestConfig) => void;
+  error: string | null;
+  request: (
+    method: HttpMethod,
+    param?: string,
+    config?: AxiosRequestConfig
+  ) => void;
 }
 
-const useRequest = <T,>(apiPaths: ApiPaths): UseRequestResponse<T> => {
+const useRequest = <T,>(
+  apiEndpoint: string,
+  errorMessagesSet: any = defaultErrorMessages
+): UseRequestResponse<T> => {
   const [data, setData] = useState<T | null>(null);
-  const [error, setError] = useState<Error | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const request = useCallback(
-    async (method: HttpMethod, config?: AxiosRequestConfig) => {
+    async (method: HttpMethod, param?: string, config?: AxiosRequestConfig) => {
       try {
-        setLoading(true);
         setError(null);
-        const response: AxiosResponse<T> = await axios({
-          method,
-          url: `${apiUri}${apiPaths[method]}`,
-          ...config,
-        });
-        setData(response.data);
+        const response: AxiosResponse<{ message: string; data: T }> = await api(
+          {
+            method,
+            url: `${apiEndpoint}${param ? `/${param}` : ""}`,
+            ...config,
+          }
+        );
+        if (response.status === 200) {
+          setData(response.data.data);
+        }
+        if (response.status === 404) {
+          setError(errorMessagesSet[404]);
+        }
       } catch (e) {
-        const _error = e as Error;
-        setError(_error);
-        console.log(_error);
-      } finally {
-        setLoading(false);
+        setError(errorMessagesSet[500]);
       }
     },
-    [apiPaths]
+    [apiEndpoint, errorMessagesSet]
   );
 
-  return { data, error, loading, request };
+  return { data, error, request };
 };
 
 export default useRequest;

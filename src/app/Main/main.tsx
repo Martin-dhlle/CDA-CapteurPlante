@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { FC, useContext } from "react";
 import { style, styleSx } from "./main.style";
 import { AppContext } from "../../context/app.context";
@@ -10,10 +10,11 @@ import useComponentSize from "../../hooks/useComponentSize";
 import componentsDeclaration from "./componentsPropertiesDeclaration";
 
 const Main: FC<{}> = (props) => {
-  const { theme, selectedSensor } = useContext(AppContext);
+  const { theme, selectedSensor, isSensorLoading } = useContext(AppContext);
 
   const { componentsProperties } = useComponentSize(componentsDeclaration);
 
+  if (isSensorLoading) return <CircularProgress />;
   return (
     <Box sx={styleSx.box[theme]}>
       {selectedSensor ? (

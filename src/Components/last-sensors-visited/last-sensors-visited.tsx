@@ -3,7 +3,7 @@ import { FC, useContext, useEffect, useState } from "react";
 import { styleSx } from "./last-sensors-visited.style";
 import { AppContext } from "../../context/app.context";
 import { List } from "@mui/icons-material";
-import SensorsList from "./sensors-list/sensors-list.components";
+import SensorsList from "./sensors-list/sensors-list";
 import {
   deleteSensorsFromLocalStorage,
   getSensorsFromLocalStorage,

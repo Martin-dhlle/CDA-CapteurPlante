@@ -9,12 +9,12 @@ const SensorItem: FC<{
 }> = ({ serialNumber, onDelete }) => {
   const { theme } = useContext(AppContext);
 
-  const { handleSubmitSerialNumber } = useContext(AppContext);
+  const { setSelectedSensor, setSensorLoading } = useContext(AppContext);
 
   const [isMouseOver, setMouseOverState] = useState<boolean>(false);
 
   const handleClickSelect = () => {
-    handleSubmitSerialNumber(serialNumber, false);
+    setSensorLoading(true);
   };
 
   const handleClickDelete = () => {

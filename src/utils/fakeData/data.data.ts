@@ -5,12 +5,12 @@ export const data: Data[] = [
     _id: "ks4iv9",
     humidityRate: 70,
     generatedAt: new Date(),
-    sensor: "vsld",
+    sensorRef: "vsld",
   },
   {
     _id: "svds",
     humidityRate: 65,
     generatedAt: new Date(),
-    sensor: "sdsdv",
+    sensorRef: "sdsdv",
   },
 ];

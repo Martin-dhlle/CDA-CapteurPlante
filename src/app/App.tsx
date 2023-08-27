@@ -4,8 +4,8 @@ import { useContext } from "react";
 import { Toaster } from "react-hot-toast";
 import { AppContext } from "../context/app.context";
 import AppProvider from "../context/app.provider";
-import Header from "./Header/header.component";
-import Main from "./Main/main.component";
+import Header from "./Header/header";
+import Main from "./Main/main";
 
 /*
   Le composant d'entrée de l'application
