@@ -6,6 +6,11 @@ import { useContext } from "react";
 import { AppContext } from "../../context/app.context";
 import LastSensorsVisited from "../../components/last-sensors-visited/last-sensors-visited";
 
+/**
+ *
+ * Le header de l'application comportant la liste des derniers sensors visités,
+ * la barre de recherche et le commutateur de dark/light mode
+ */
 const Header: React.FC<{}> = ({}) => {
   const { theme } = useContext(AppContext);
 

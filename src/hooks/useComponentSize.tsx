@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export type ComponentProperties = {
   componentIndex: number;
@@ -6,6 +6,11 @@ export type ComponentProperties = {
   isClosed: boolean;
 };
 
+/**
+ * Custom hook qui offre la possibilité de gérer la taille et l'état des composants déclarés
+ * @param componentsDeclaration Permet de déclarer les états initiaux (size, closeState) des composants du main
+ * @returns
+ */
 const useComponentsProperties = (
   componentsDeclaration: ComponentProperties[]
 ) => {
@@ -13,18 +18,41 @@ const useComponentsProperties = (
     ComponentProperties[]
   >(componentsDeclaration);
 
-  const changeComponentProperties = (
-    propertiesToChange: ComponentProperties
-  ) => {
-    const updatedProperties = componentsProperties.map((component) =>
-      component.componentIndex === propertiesToChange.componentIndex
-        ? { ...component, ...propertiesToChange }
-        : component
-    );
-    setComponentsProperties(updatedProperties);
-  };
+  const changeComponentProperties = useCallback(
+    (propertiesToChange: ComponentProperties) => {
+      const updatedProperties = componentsProperties.map((component) =>
+        component.componentIndex === propertiesToChange.componentIndex
+          ? propertiesToChange
+          : component
+      );
+      console.log(updatedProperties);
 
-  return { componentsProperties, changeComponentProperties };
+      setComponentsProperties(updatedProperties);
+    },
+    [componentsProperties]
+  );
+
+  const changeMultipleComponentProperties = useCallback(
+    (multiplePropertiesToChange: ComponentProperties[]) => {
+      const updatedProperties = [...componentsProperties]; // Create a new array
+
+      multiplePropertiesToChange.forEach((change) => {
+        updatedProperties[change.componentIndex] = {
+          ...updatedProperties[change.componentIndex],
+          ...change,
+        };
+      });
+
+      setComponentsProperties(updatedProperties);
+    },
+    [componentsProperties]
+  );
+
+  return {
+    componentsProperties,
+    changeComponentProperties,
+    changeMultipleComponentProperties,
+  };
 };
 
 export default useComponentsProperties;

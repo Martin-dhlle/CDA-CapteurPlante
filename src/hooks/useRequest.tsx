@@ -15,6 +15,12 @@ interface UseRequestResponse<T> {
   ) => void;
 }
 
+/**
+ * Custom hook pour envoyer des requêtes à l'API
+ * @param apiEndpoint endpoint de l'API
+ * @param errorMessagesSet messages d'erreurs à déclarer (faculatif)
+ * @returns
+ */
 const useRequest = <T,>(
   apiEndpoint: string,
   errorMessagesSet: any = defaultErrorMessages
