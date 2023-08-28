@@ -33,11 +33,12 @@ export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
   m: {
     light: {
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "center",
       bgcolor: "lightblue",
       borderRadius: "10px",
       padding: "20px",
       width: "50vh",
+      height: "30vh",
     },
     dark: {
       display: "flex",
@@ -46,6 +47,7 @@ export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
       borderRadius: "10px",
       padding: "20px",
       width: "50vh",
+      height: "40vh",
     },
   },
   l: {

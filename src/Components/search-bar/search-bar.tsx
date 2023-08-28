@@ -70,10 +70,17 @@ const SearchBar: FC<{}> = ({}) => {
       setSensorLoading(false);
     }
 
+    if (newSensor && dataError) {
+      toast(dataError);
+      setSelectedSensor({ ...newSensor, data: [] });
+      if (!getSensorsFromLocalStorage().includes(newSensor.serialNumber)) {
+        addSensorToLocalStorage(newSensor);
+      }
+      setSensorLoading(false);
+    }
+
     if (newSensor && newData) {
       setSelectedSensor({ ...newSensor, data: newData });
-      console.log(newSensor);
-
       if (!getSensorsFromLocalStorage().includes(newSensor.serialNumber)) {
         addSensorToLocalStorage(newSensor);
       }
@@ -82,6 +89,7 @@ const SearchBar: FC<{}> = ({}) => {
   }, [
     newData,
     sensorError,
+    dataError,
     newSensor,
     serialNumberValue,
     setSelectedSensor,
@@ -119,6 +127,7 @@ const SearchBar: FC<{}> = ({}) => {
       <TextField
         inputProps={{
           style: style.input[theme],
+          maxLength: 17,
         }}
         placeholder="00:00:00:00:00:00"
         variant="outlined"
