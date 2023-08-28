@@ -1,10 +1,10 @@
 import { Box, CircularProgress } from "@mui/material";
 import { FC, useContext } from "react";
 import { AppContext } from "../../context/app.context";
-import LastData from "../../components/last-data/last-data.component";
-import ListAlertData from "../../components/list-alert-data/list-alert-data.component";
-import ScalableBox from "../../components/UI/scalable-box/scalable-box.component";
-import DataChart from "../../components/data-chart/data-chart.component";
+import LastData from "../../components/last-data/last-data";
+import ListAlertData from "../../components/list-alert-data/list-alert-data";
+import ScalableBox from "../../components/UI/scalable-box/scalable-box";
+import DataChart from "../../components/data-chart/data-chart";
 import useComponentSize from "../../hooks/useComponentSize";
 import componentsDeclaration from "./componentsPropertiesDeclaration";
 import { style, styleSx } from "./main.style";
@@ -38,8 +38,11 @@ const Main: FC<{}> = (props) => {
           {selectedSensor.data && (
             <>
               <ListAlertData
+                sensorData={selectedSensor.data}
                 componentsProperties={componentsProperties}
-                changeComponentProperties={changeComponentProperties}
+                changeMultipleComponentProperties={
+                  changeMultipleComponentProperties
+                }
               />
               <DataChart
                 data={selectedSensor.data}

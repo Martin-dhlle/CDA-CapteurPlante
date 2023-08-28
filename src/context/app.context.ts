@@ -12,7 +12,7 @@ export interface AppContextInterface {
 
 export const AppContext: Context<AppContextInterface> =
   createContext<AppContextInterface>({
-    theme: "light",
+    theme: "dark",
     toggleTheme: () => {},
     selectedSensor: null,
     setSelectedSensor: () => {},
