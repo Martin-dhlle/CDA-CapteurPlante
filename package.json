@@ -36,11 +36,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron:build:mac": "npm run build && electron-builder -m -c.extraMetadata.main=build/electron.js",
-    "electron:build:linux": "npm run build && electron-builder -m -c.extraMetadata.main=build/electron.js",
-    "electron:build:win": "npm run build && electron-builder -m -c.extraMetadata.main=build/electron.js"
+    "electron:build:mac": "npm run build && electron-builder -m",
+    "electron:build:linux": "npm run build && electron-builder -l",
+    "electron:build:win": "npm run build && electron-builder -w"
   },
-  "main": "./electron/app.js",
+  "main": "public/electron.js",
+  "homepage": "./",
   "build": {
     "appId": "com.electron.myapp",
     "productName": "My Electron App",

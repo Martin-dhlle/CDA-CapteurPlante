@@ -13,11 +13,9 @@ const createWindow = () => {
     },
   });
 
-  win.loadURL(
-    isDev
-      ? "http://localhost:3000"
-      : `${path.join(__dirname, "../build/index.html")}`
-  );
+  isDev
+    ? win.loadURL("http://localhost:3000")
+    : win.loadFile(`${path.join(__dirname, "../build/index.html")}`);
 };
 
 app.whenReady().then(() => {
