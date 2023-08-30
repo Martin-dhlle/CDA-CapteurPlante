@@ -5,6 +5,9 @@ import { ComponentProperties } from "../../hooks/useComponentSize";
 import { Button } from "@mui/material";
 import { style } from "./last-data.style";
 
+/**
+ * La dernière alerte en détail
+ */
 const LastData: FC<{
   sensor: Sensor;
   componentsProperties: ComponentProperties[];

@@ -5,6 +5,9 @@ import Data from "../../utils/interfaces/Data";
 import { Button } from "@mui/material";
 import { style } from "./list-alert-data.style";
 
+/**
+ * La liste des alertes
+ */
 const ListAlertData: FC<{
   sensorData: Data[];
   componentsProperties: ComponentProperties[];

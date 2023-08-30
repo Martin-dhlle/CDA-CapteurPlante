@@ -9,6 +9,9 @@ import {
   getSensorsFromLocalStorage,
 } from "../../utils/services/localStorageServices";
 
+/**
+ * La liste des capteurs visités récemment
+ */
 const LastSensorsVisited: FC<{}> = ({}) => {
   const { theme } = useContext(AppContext);
 

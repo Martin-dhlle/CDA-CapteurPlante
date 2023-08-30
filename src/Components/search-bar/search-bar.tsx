@@ -29,6 +29,9 @@ import {
   sensorErrorMessages,
 } from "../../utils/error/apiErrorMessage";
 
+/**
+ * La barre de recherche
+ */
 const SearchBar: FC<{}> = ({}) => {
   const { theme, setSelectedSensor, setSensorLoading } = useContext(AppContext);
 
