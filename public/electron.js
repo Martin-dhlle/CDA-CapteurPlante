@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const isDev = require("electron-is-dev");
 const path = require("path");
 
@@ -10,6 +10,7 @@ const createWindow = () => {
     height: 1200,
     webPreferences: {
       nodeIntegration: true,
+      preload: "",
     },
   });
 
@@ -27,3 +28,7 @@ app.whenReady().then(() => {
  * alors quitter l'application.
  */
 app.on("window-all-closed", () => !isMacos && app.quit());
+
+ipcMain.on("apiKey", (e, arg) => {
+  //store apiKey
+});
