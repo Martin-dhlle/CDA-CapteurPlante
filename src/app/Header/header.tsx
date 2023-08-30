@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import SearchBar from "../../components/search-bar/search-bar";
-import { styleSx } from "./header.style";
 import DarkModeSwitcher from "../../components/dark-mode-switcher/dark-mode-switcher";
 import { useContext } from "react";
 import { AppContext } from "../../context/app.context";
 import LastSensorsVisited from "../../components/last-sensors-visited/last-sensors-visited";
+import { styleSx } from "./header.style";
 
 /**
  *
