@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import ScalableBox from "../UI/scalable-box/scalable-box";
 import Sensor from "../../utils/interfaces/Sensor";
 import { ComponentProperties } from "../../hooks/useComponentSize";
@@ -44,12 +44,6 @@ const LastData: FC<{
       },
     ]);
   };
-
-  useEffect(() => {
-    if (sensor) {
-      console.log(sensor);
-    }
-  }, [sensor]);
 
   if (componentsProperties[0].isClosed) return null;
   return (

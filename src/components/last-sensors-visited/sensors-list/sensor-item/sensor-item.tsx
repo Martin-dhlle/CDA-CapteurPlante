@@ -28,6 +28,7 @@ const SensorItem: FC<{
     data: newSensor,
     error: sensorError,
   } = useRequest<Sensor>(sensorApiEndpoint, sensorErrorMessages);
+
   const {
     request: requestData,
     data: newData,
@@ -49,32 +50,6 @@ const SensorItem: FC<{
     requestData("GET", serialNumber); // param : serialNumber
   };
 
-  // useEffect pour la vérification des requêtes du capteur
-  useEffect(() => {
-    if (sensorError) {
-      toast.error(sensorError);
-      setSensorLoading(false);
-    }
-
-    if (newSensor && dataError) {
-      toast(dataError);
-      setSelectedSensor({ ...newSensor, data: [] });
-      setSensorLoading(false);
-    }
-
-    if (newSensor && newData) {
-      setSelectedSensor({ ...newSensor, data: newData });
-      setSensorLoading(false);
-    }
-  }, [
-    dataError,
-    newData,
-    newSensor,
-    sensorError,
-    setSelectedSensor,
-    setSensorLoading,
-  ]);
-
   const [isMouseOver, setMouseOverState] = useState<boolean>(false);
 
   const handleClickSelect = () => {
@@ -92,6 +67,28 @@ const SensorItem: FC<{
   const handleMouseLeave = () => {
     setMouseOverState(false);
   };
+
+  // useEffect pour la vérification des requêtes du capteur
+  useEffect(() => {
+    if (sensorError) {
+      toast.error(sensorError);
+      setSensorLoading(false);
+    }
+
+    if (dataError) toast(dataError);
+
+    if (newSensor) {
+      setSelectedSensor({ ...newSensor, data: newData ?? [] });
+      setSensorLoading(false);
+    }
+  }, [
+    dataError,
+    newData,
+    newSensor,
+    sensorError,
+    setSelectedSensor,
+    setSensorLoading,
+  ]);
 
   return (
     <Box

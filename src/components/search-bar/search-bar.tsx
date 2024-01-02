@@ -2,7 +2,8 @@ import { Box, TextField } from "@mui/material";
 import {
   ChangeEvent,
   ChangeEventHandler,
-  FC,
+  FormEvent,
+  FormEventHandler,
   KeyboardEvent,
   KeyboardEventHandler,
   useContext,
@@ -32,7 +33,7 @@ import {
 /**
  * La barre de recherche
  */
-const SearchBar: FC<{}> = ({}) => {
+const SearchBar = () => {
   const { theme, setSelectedSensor, setSensorLoading } = useContext(AppContext);
 
   const [serialNumberValue, setSerialNumberValue] = useState<string>("");
@@ -45,6 +46,7 @@ const SearchBar: FC<{}> = ({}) => {
     data: newSensor,
     error: sensorError,
   } = useRequest<Sensor>(sensorApiEndpoint, sensorErrorMessages);
+
   const {
     request: requestData,
     data: newData,
@@ -73,28 +75,24 @@ const SearchBar: FC<{}> = ({}) => {
       setSensorLoading(false);
     }
 
-    if (newSensor && dataError) {
-      toast(dataError);
-      setSelectedSensor({ ...newSensor, data: [] });
-      if (!getSensorsFromLocalStorage().includes(newSensor.serialNumber)) {
-        addSensorToLocalStorage(newSensor);
-      }
-      setSensorLoading(false);
-    }
+    if (dataError) toast(dataError);
 
-    if (newSensor && newData) {
-      setSelectedSensor({ ...newSensor, data: newData });
+    if (newSensor) {
+      console.log("pas d'erreur");
+      console.log(newData);
+
+      setSelectedSensor({ ...newSensor, data: newData ?? [] });
       if (!getSensorsFromLocalStorage().includes(newSensor.serialNumber)) {
         addSensorToLocalStorage(newSensor);
       }
       setSensorLoading(false);
+      console.log(newData?.length);
     }
   }, [
-    newData,
-    sensorError,
     dataError,
+    newData,
     newSensor,
-    serialNumberValue,
+    sensorError,
     setSelectedSensor,
     setSensorLoading,
   ]);
@@ -106,40 +104,38 @@ const SearchBar: FC<{}> = ({}) => {
     setInputError("include");
   };
 
-  const handleConfirmSubmitValue: KeyboardEventHandler<HTMLInputElement> = (
-    event: KeyboardEvent<HTMLInputElement>
+  const handleConfirmSubmitValue: FormEventHandler<HTMLFormElement> = async (
+    event: FormEvent<HTMLFormElement>
   ) => {
-    if (event.key === "Enter") {
-      inputError === "none"
-        ? handleSubmitSerialNumber(serialNumberValue)
-        : toast.error("Le format du numéro de série est incorrect");
-      return;
-    }
+    event.preventDefault();
+    inputError === "none"
+      ? await handleSubmitSerialNumber(serialNumberValue)
+      : toast.error("Le format du numéro de série est incorrect");
   };
 
   useEffect(() => {
     if (stringValidator.test(serialNumberValue) && inputError !== "initial") {
       setInputError("none");
-      console.log("no error");
     }
   }, [inputError, serialNumberValue]);
 
   return (
     <Box sx={styleSx.box[theme]}>
       <p>Identification du capteur par la valeur hexadécimal</p>
-      <TextField
-        inputProps={{
-          style: style.input[theme],
-          maxLength: 17,
-        }}
-        placeholder="00:00:00:00:00:00"
-        variant="outlined"
-        type="text"
-        value={serialNumberValue}
-        onChange={handleChangeValue}
-        onKeyDown={handleConfirmSubmitValue}
-        error={inputError === "include"}
-      />
+      <form onSubmit={handleConfirmSubmitValue}>
+        <TextField
+          inputProps={{
+            style: style.input[theme],
+            maxLength: 17,
+          }}
+          placeholder="00:00:00:00:00:00"
+          variant="outlined"
+          type="text"
+          value={serialNumberValue}
+          onChange={handleChangeValue}
+          error={inputError === "include"}
+        />
+      </form>
     </Box>
   );
 };
