@@ -7,7 +7,6 @@ import LastSensorsVisited from "../../components/last-sensors-visited/last-senso
 import { styleSx } from "./header.style";
 
 /**
- *
  * Le header de l'application comportant la liste des derniers sensors visités,
  * la barre de recherche et le commutateur de dark/light mode
  */

@@ -23,7 +23,13 @@ const Main: FC<{}> = (props) => {
     changeMultipleComponentProperties,
   } = useComponentSize(componentsDeclaration);
 
-  if (isSensorLoading) return <CircularProgress />;
+  if (isSensorLoading)
+    return (
+      <Box sx={styleSx.box[theme]}>
+        <CircularProgress />
+      </Box>
+    );
+
   return (
     <Box sx={styleSx.box[theme]}>
       {selectedSensor ? (
