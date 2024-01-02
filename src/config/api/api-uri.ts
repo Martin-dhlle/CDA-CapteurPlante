@@ -1,3 +1,3 @@
-const apiUri = "https://6fp3mwpyr0.execute-api.us-east-1.amazonaws.com/prod";
+const apiUri = process.env.REACT_APP_API_URI;
 
 export default apiUri;
