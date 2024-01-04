@@ -4,7 +4,11 @@ import { CSSProperties } from "react";
 export const style: { [key: string]: { [key: string]: CSSProperties } } = {
   input: {
     light: { textAlign: "center", backgroundColor: "white" },
-    dark: { textAlign: "center", backgroundColor: "lightgray" },
+    dark: {
+      textAlign: "center",
+      backgroundColor: "lightgray",
+      borderRadius: 10,
+    },
   },
 };
 
