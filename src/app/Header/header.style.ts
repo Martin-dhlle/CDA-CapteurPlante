@@ -8,7 +8,7 @@ export const styleSx: { [key: string]: { [key: string]: SxProps } } = {
     light: {
       display: "flex",
       flexDirection: "row",
-      bgcolor: "lightseagreen",
+      bgcolor: "#3A8B9D",
       color: "black",
       padding: "10px",
     },
