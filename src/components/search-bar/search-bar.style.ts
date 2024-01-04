@@ -3,7 +3,7 @@ import { CSSProperties } from "react";
 
 export const style: { [key: string]: { [key: string]: CSSProperties } } = {
   input: {
-    light: { textAlign: "center", backgroundColor: "white" },
+    light: { textAlign: "center", backgroundColor: "white", borderRadius: 10 },
     dark: {
       textAlign: "center",
       backgroundColor: "lightgray",
