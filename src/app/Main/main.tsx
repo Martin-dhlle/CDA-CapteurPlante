@@ -1,13 +1,13 @@
 import { Box, CircularProgress } from "@mui/material";
 import { FC, useContext } from "react";
 import { AppContext } from "../../context/app.context";
-import LastData from "../../components/last-data/last-data";
 import ListAlertData from "../../components/list-alert-data/list-alert-data";
 import ScalableBox from "../../components/UI/scalable-box/scalable-box";
 import DataChart from "../../components/data-chart/data-chart";
 import useComponentSize from "../../hooks/useComponentSize";
 import componentsDeclaration from "./componentsPropertiesDeclaration";
 import { style, styleSx } from "./main.style";
+import SensorManagement from "../../components/sensor-management/sensor-management";
 
 /**
  * Composant regroupant l'affichage de la dernière alerte, la liste de l'historique
@@ -34,7 +34,7 @@ const Main: FC<{}> = (props) => {
     <Box sx={styleSx.box[theme]}>
       {selectedSensor ? (
         <div style={style.rowSeparate}>
-          <LastData
+          <SensorManagement
             sensor={selectedSensor}
             componentsProperties={componentsProperties}
             changeMultipleComponentProperties={

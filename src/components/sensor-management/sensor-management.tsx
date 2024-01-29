@@ -3,18 +3,22 @@ import ScalableBox from "../UI/scalable-box/scalable-box";
 import Sensor from "../../utils/interfaces/Sensor";
 import { ComponentProperties } from "../../hooks/useComponentSize";
 import { Button } from "@mui/material";
-import { style } from "./last-data.style";
+import { style } from "./sensor-management.style";
+import SensorSettings from "../sensor-settings/sensor-settings";
 
 /**
- * La dernière alerte en détail
+ * La dernière alerte en détail et
  */
-const LastData: FC<{
+const SensorManagement: FC<{
   sensor: Sensor;
   componentsProperties: ComponentProperties[];
   changeMultipleComponentProperties: (
     propertiesToChange: ComponentProperties[]
   ) => void;
 }> = ({ sensor, componentsProperties, changeMultipleComponentProperties }) => {
+  /**
+   * When the user click on "statistiques" button, open component on index 0 and component on index 2
+   */
   const handleClickButtonStatistiques = () => {
     changeMultipleComponentProperties([
       {
@@ -30,6 +34,9 @@ const LastData: FC<{
     ]);
   };
 
+  /**
+   * When the user click on "historique" button, open a component on index 0 and another component on index 1
+   */
   const handleClickButtonHistorique = () => {
     changeMultipleComponentProperties([
       {
@@ -83,24 +90,10 @@ const LastData: FC<{
         )}
       </div>
       {componentsProperties[0].size === "l" && (
-        <div>
-          <p>Paramètres du capteur</p>
-          <span>
-            <Button type="button" variant="contained">
-              Changer le type de plante
-            </Button>
-          </span>
-          <span>
-            <p>Fréquence de vérification :</p>
-            <p style={style.textCenter}>{`${sensor.timer} H`}</p>
-            <Button type="button" variant="contained">
-              Changer l'intervalle
-            </Button>
-          </span>
-        </div>
+        <SensorSettings sensorTimerValue={sensor.timer ?? 0} />
       )}
     </ScalableBox>
   );
 };
 
-export default LastData;
+export default SensorManagement;
